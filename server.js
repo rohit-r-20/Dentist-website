@@ -19,7 +19,7 @@ app.use(cors({
     'http://127.0.0.1:5500',               // VS Code Live Server
     'http://localhost:3000'                 // React dev server
   ],
-  methods: ['GET','POST','PATCH','DELETE'],
+  methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   credentials: true
 }));
 app.use(express.json({ limit: '10kb' }));
@@ -54,13 +54,13 @@ app.use(async (req, res, next) => {
 
 // ─── APPOINTMENT SCHEMA ───
 const appointmentSchema = new mongoose.Schema({
-  name:    { type: String, required: true, trim: true, maxlength: 100 },
-  phone:   { type: String, required: true, trim: true, maxlength: 20 },
+  name: { type: String, required: true, trim: true, maxlength: 100 },
+  phone: { type: String, required: true, trim: true, maxlength: 20 },
   service: { type: String, trim: true, maxlength: 100 },
-  date:    { type: String, required: true },
-  time:    { type: String, default: 'Any time' },
+  date: { type: String, required: true },
+  time: { type: String, default: 'Any time' },
   message: { type: String, trim: true, maxlength: 500 },
-  status:  { type: String, enum: ['pending','confirmed','cancelled'], default: 'pending' },
+  status: { type: String, enum: ['pending', 'confirmed', 'cancelled'], default: 'pending' },
   createdAt: { type: Date, default: Date.now }
 });
 
@@ -154,7 +154,7 @@ apiRouter.get('/appointments', async (req, res) => {
     const { status, date } = req.query;
     const filter = {};
     if (status) filter.status = status;
-    if (date)   filter.date   = date;
+    if (date) filter.date = date;
     const appts = await Appointment.find(filter).sort({ createdAt: -1 }).limit(100);
     res.json({ success: true, count: appts.length, data: appts });
   } catch (err) {
@@ -239,3 +239,14 @@ if (!process.env.VERCEL) {
 }
 
 module.exports = app;
+
+
+const path = require("path");
+
+// Serve static files
+app.use(express.static(__dirname));
+
+// Home route
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
