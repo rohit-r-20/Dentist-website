@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thiru Dentistry | Your Smile, Our Priority – Padianallur, Chennai</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <meta name="description"
+    content="Thiru Dentistry in Padianallur, Tamil Nadu offers expert dental care including implants, braces, root canals & cosmetic dentistry. Book an appointment today!" />
+  <meta name="keywords"
+    content="dental clinic Chennai, dentist Padianallur, Thiru Dentistry, Dr Sivapriya, dental implants, braces, root canal" />
+  <meta name="author" content="Thiru Dentistry" />
+  <meta property="og:title" content="Thiru Dentistry | Your Smile, Our Priority" />
+  <meta property="og:description"
+    content="Expert dental care in Padianallur, Tamil Nadu. Book your appointment online." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+  <style>
+    :root {
+      --primary: #0A3D62;
+      --primary-light: #1a5a8a;
+      --secondary: #1ABC9C;
+      --secondary-dark: #0e9c82;
+      --bg: #F8FAFC;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --white: #ffffff;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --shadow: 0 4px 24px rgba(10, 61, 98, 0.10);
+      --shadow-lg: 0 12px 48px rgba(10, 61, 98, 0.15);
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+
+    [data-theme='dark'] {
+      --bg: #0f1923;
+      --text: #e8ecf1;
+      --text-light: #8a9bb5;
+      --white: #162a3a;
+      --card-bg: #162a3a;
+      --border: rgba(255,255,255,0.08);
+      --shadow: 0 4px 24px rgba(0,0,0,0.3);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.4);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* ─── NAVBAR ─── */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      transition: box-shadow 0.3s, background 0.3s;
+    }
+
+    [data-theme='dark'] .navbar {
+      background: rgba(15, 25, 35, 0.95);
+    }
+
+    .navbar.scrolled {
+      box-shadow: var(--shadow);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .logo-text {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--primary);
+    }
+
+    .logo-text span {
+      color: var(--secondary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--secondary);
+    }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 24px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(10, 61, 98, 0.3);
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--primary);
+      margin: 5px 0;
+      transition: 0.3s;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      padding: 20px 5%;
+      box-shadow: var(--shadow);
+      z-index: 999;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0A3D62 0%, #0d4f7c 50%, #1a6694 100%);
+      display: flex;
+      align-items: center;
+      padding: 100px 5% 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(26, 188, 156, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 600px;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(26, 188, 156, 0.2);
+      border: 1px solid rgba(26, 188, 156, 0.4);
+      color: #1ABC9C;
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 28px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 800;
+      color: white;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: #1ABC9C;
+    }
+
+    .hero p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #1ABC9C, #0e9c82);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 32px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(26, 188, 156, 0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 50px;
+      padding: 12px 30px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: white;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 48px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      text-align: left;
+    }
+
+    .stat-num {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 1.8rem;
+      color: white;
+    }
+
+    .stat-label {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.8rem;
+      margin-top: 2px;
+    }
+
+    /* ─── SECTIONS ─── */
+    .section {
+      padding: 90px 5%;
+    }
+
+    .section-alt {
+      background: white;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: rgba(26, 188, 156, 0.1);
+      color: var(--secondary);
+      border-radius: 50px;
+      padding: 5px 16px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      color: var(--text-light);
+      font-size: 1rem;
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ─── ABOUT ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-visual {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      border-radius: 24px;
+      padding: 50px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 420px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-visual::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 200px;
+      height: 200px;
+      background: rgba(26, 188, 156, 0.15);
+      border-radius: 50%;
+    }
+
+    .doc-avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .about-visual h3 {
+      color: white;
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .about-visual p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+
+    .about-badge {
+      background: rgba(26, 188, 156, 0.2);
+      border: 1px solid rgba(26, 188, 156, 0.4);
+      color: #1ABC9C;
+      border-radius: 50px;
+      padding: 5px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-top: 16px;
+    }
+
+    .about-content h2 {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+
+    .about-content p {
+      color: var(--text-light);
+      line-height: 1.9;
+      margin-bottom: 16px;
+    }
+
+    .about-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .about-feat {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .feat-icon {
+      font-size: 1.1rem;
+    }
+
+    /* ─── SERVICES ─── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      border: 1px solid var(--border);
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      cursor: default;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--secondary);
+    }
+
+    .service-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, rgba(10, 61, 98, 0.08), rgba(26, 188, 156, 0.12));
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      transition: background 0.3s;
+    }
+
+    .service-card:hover .service-icon {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+    }
+
+    .service-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      color: var(--text-light);
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
+    .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--secondary);
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-top: 16px;
+      transition: gap 0.2s;
+      text-decoration: none;
+    }
+
+    .service-card:hover .service-link {
+      gap: 10px;
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 16px;
+      right: 24px;
+      font-size: 5rem;
+      color: rgba(26, 188, 156, 0.1);
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .stars {
+      color: #f59e0b;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+
+    .testimonial-card p {
+      color: var(--text);
+      font-size: 0.93rem;
+      line-height: 1.75;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .author-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .author-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--primary);
+    }
+
+    .author-tag {
+      color: var(--text-light);
+      font-size: 0.78rem;
+    }
+
+    /* ─── APPOINTMENT ─── */
+    .appointment-section {
+      background: linear-gradient(135deg, var(--primary) 0%, #0d4f7c 100%);
+      padding: 90px 5%;
+    }
+
+    .appointment-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .apt-info h2 {
+      color: white;
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .apt-info p {
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
+    .apt-info-items {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .apt-info-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.9rem;
+    }
+
+    .apt-info-item span:first-child {
+      font-size: 1.2rem;
+    }
+
+    .apt-form {
+      background: white;
+      border-radius: 24px;
+      padding: 40px 36px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .apt-form h3 {
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin-bottom: 28px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      background: var(--bg);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      width: 100%;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.12);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 14px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top: 4px;
+    }
+
+    .form-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(26, 188, 156, 0.35);
+    }
+
+    .form-submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .success-msg {
+      background: rgba(26, 188, 156, 0.1);
+      border: 1px solid var(--secondary);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      text-align: center;
+      color: var(--secondary-dark);
+      font-weight: 600;
+      margin-top: 16px;
+    }
+
+    /* ─── CONTACT ─── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: white;
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      border: 1px solid var(--border);
+    }
+
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(10, 61, 98, 0.08), rgba(26, 188, 156, 0.1));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .contact-item h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .contact-item p,
+    .contact-item a {
+      color: var(--text-light);
+      font-size: 0.88rem;
+      text-decoration: none;
+      line-height: 1.6;
+    }
+
+    .contact-item a:hover {
+      color: var(--secondary);
+    }
+
+    .map-container {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .map-container iframe {
+      display: block;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--primary);
+      color: rgba(255, 255, 255, 0.75);
+      padding: 60px 5% 30px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand {
+      max-width: 280px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .footer-logo-icon {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .footer-logo-text {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      color: white;
+    }
+
+    .footer-brand p {
+      font-size: 0.87rem;
+      line-height: 1.8;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .social-btn {
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+      color: white;
+    }
+
+    .social-btn:hover {
+      background: var(--secondary);
+    }
+
+    .footer-col h4 {
+      color: white;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.65);
+      text-decoration: none;
+      font-size: 0.87rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--secondary);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: gap;
+      font-size: 0.82rem;
+    }
+
+    .footer-bottom a {
+      color: var(--secondary);
+      text-decoration: none;
+    }
+
+    .rating-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(26, 188, 156, 0.15);
+      border: 1px solid rgba(26, 188, 156, 0.3);
+      color: #1ABC9C;
+      border-radius: 50px;
+      padding: 4px 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-top: 12px;
+    }
+
+    /* ─── CHATBOT ─── */
+    .chat-fab {
+      position: fixed;
+      bottom: 88px;
+      right: 24px;
+      z-index: 1000;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(10, 61, 98, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      transition: transform 0.2s;
+    }
+
+    .chat-fab:hover {
+      transform: scale(1.08);
+    }
+
+    .chat-window {
+      position: fixed;
+      bottom: 158px;
+      right: 24px;
+      z-index: 1000;
+      width: 360px;
+      max-width: calc(100vw - 48px);
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 16px 60px rgba(10, 61, 98, 0.22);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: opacity 0.25s, transform 0.25s;
+      transform-origin: bottom right;
+    }
+
+    .chat-window.hidden {
+      opacity: 0;
+      transform: scale(0.9);
+      pointer-events: none;
+    }
+
+    .chat-header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .chat-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .chat-header-info h4 {
+      color: white;
+      font-size: 0.92rem;
+    }
+
+    .chat-header-info p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.75rem;
+    }
+
+    .chat-online {
+      width: 8px;
+      height: 8px;
+      background: #1ABC9C;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 4px;
+    }
+
+    .chat-close {
+      margin-left: auto;
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    .chat-messages {
+      padding: 16px;
+      height: 300px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .chat-messages::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .chat-messages::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .chat-messages::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 2px;
+    }
+
+    .msg {
+      max-width: 82%;
+      font-size: 0.87rem;
+      line-height: 1.6;
+    }
+
+    .msg-bot {
+      align-self: flex-start;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px 14px 14px 2px;
+      padding: 10px 14px;
+      color: var(--text);
+    }
+
+    .msg-user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+      border-radius: 14px 14px 2px 14px;
+      padding: 10px 14px;
+      color: white;
+    }
+
+    .msg-time {
+      font-size: 0.7rem;
+      color: var(--text-light);
+      margin-top: 3px;
+    }
+
+    .msg-user .msg-time {
+      color: rgba(255, 255, 255, 0.7);
+      text-align: right;
+    }
+
+    .typing-indicator {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      padding: 10px 14px;
+    }
+
+    .typing-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--text-light);
+      animation: typing 1s ease-in-out infinite;
+    }
+
+    .typing-dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing-dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes typing {
+
+      0%,
+      60%,
+      100% {
+        transform: translateY(0);
+      }
+
+      30% {
+        transform: translateY(-6px);
+      }
+    }
+
+    .chat-input-area {
+      border-top: 1px solid var(--border);
+      padding: 12px 16px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+    }
+
+    .chat-input {
+      flex: 1;
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 10px 16px;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.88rem;
+      outline: none;
+      resize: none;
+      max-height: 80px;
+      overflow-y: auto;
+      transition: border-color 0.2s;
+    }
+
+    .chat-input:focus {
+      border-color: var(--secondary);
+    }
+
+    .chat-send {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+      border: none;
+      cursor: pointer;
+      color: white;
+      font-size: 0.9rem;
+      transition: transform 0.2s;
+    }
+
+    .chat-send:hover {
+      transform: scale(1.08);
+    }
+
+    /* ─── WHATSAPP ─── */
+    .whatsapp-fab {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1000;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #25D366;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 6px 24px rgba(37, 211, 102, 0.4);
+      transition: transform 0.2s;
+    }
+
+    .whatsapp-fab:hover {
+      transform: scale(1.08);
+    }
+
+    /* ─── STICKY CALL MOBILE ─── */
+    .sticky-call {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 14px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      box-shadow: 0 -4px 16px rgba(10, 61, 98, 0.2);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+    }
+
+    @media (max-width: 768px) {
+
+      .nav-links,
+      .nav-cta {
+        display: none;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .hero {
+        padding: 90px 5% 50px;
+      }
+
+      .hero-stats {
+        gap: 20px;
+      }
+
+      .about-grid,
+      .appointment-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .about-features {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+
+      .sticky-call {
+        display: block;
+      }
+
+      .whatsapp-fab {
+        bottom: 68px;
+      }
+
+      .chat-fab {
+        bottom: 130px;
+      }
+
+      .chat-window {
+        bottom: 200px;
+        right: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .section {
+        padding: 60px 5%;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .btn-primary,
+      .btn-outline {
+        text-align: center;
+      }
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-up {
+      animation: fadeUp 0.6s ease forwards;
+    }
+
+    .delay-1 {
+      animation-delay: 0.1s;
+      opacity: 0;
+    }
+
+    .delay-2 {
+      animation-delay: 0.2s;
+      opacity: 0;
+    }
+
+    .delay-3 {
+      animation-delay: 0.3s;
+      opacity: 0;
+    }
+
+    .delay-4 {
+      animation-delay: 0.4s;
+      opacity: 0;
+    }
+
+    /* Loading */
+    .page-load {
+      animation: fadeUp 0.5s ease forwards;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    // Init theme immediately to prevent flash
+    (function() {
+      var saved = localStorage.getItem('site-theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
+
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    // ─── DATA ───
+    const SERVICES = [
+      { icon: "🦷", title: "Root Canal Treatment", desc: "Advanced endodontic therapy to save infected teeth, relieve pain, and restore function with precision and care." },
+      { icon: "🔩", title: "Dental Implants", desc: "Permanent, natural-looking implants to replace missing teeth—restoring your smile and bite with lasting results." },
+      { icon: "😁", title: "Braces & Orthodontics", desc: "Traditional braces and modern aligner options to straighten teeth and achieve the perfect smile alignment." },
+      { icon: "🩺", title: "Tooth Extraction", desc: "Safe, gentle extractions including wisdom teeth removal with minimal discomfort and quick recovery." },
+      { icon: "✨", title: "Cosmetic Dentistry", desc: "Teeth whitening, veneers, and smile makeovers to enhance your confidence and appearance." },
+      { icon: "🏥", title: "General Dentistry", desc: "Comprehensive check-ups, cleanings, fillings, and preventive care to keep your oral health at its best." }
+    ];
+
+    const TESTIMONIALS = [
+      { text: "Great staff and exceptional service—highly recommend Thiru Dentistry! Dr. Sivapriya is incredibly thorough and explains everything in detail. My entire family comes here.", name: "Ramesh K.", tag: "Regular Patient", init: "R" },
+      { text: "Doctor has a lot of patience and makes you feel completely at ease. I was very anxious about my root canal, but the entire procedure was surprisingly comfortable.", name: "Priya M.", tag: "Root Canal Patient", init: "P" },
+      { text: "Amazing implant work! I couldn't be happier with the results. The clinic is spotless, the staff is warm, and Dr. Sivapriya is a true professional.", name: "Suresh A.", tag: "Implant Patient", init: "S" }
+    ];
+
+    // ─── NAVBAR ───
+    function Navbar({ openBooking }) {
+      const [scrolled, setScrolled] = useState(false);
+      const [menuOpen, setMenuOpen] = useState(false);
+
+      useEffect(() => {
+        const onScroll = () => setScrolled(window.scrollY > 40);
+        window.addEventListener('scroll', onScroll);
+        return () => window.removeEventListener('scroll', onScroll);
+      }, []);
+
+      const links = ['About', 'Services', 'Testimonials', 'Contact'];
+
+      return (
+        <>
+          <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+            <a href="#hero" className="logo">
+              <div className="logo-icon">🦷</div>
+              <div className="logo-text">Thiru <span>Dentistry</span></div>
+            </a>
+            <ul className="nav-links">
+              {links.map(l => <li key={l}><a href={`#${l.toLowerCase()}`}>{l}</a></li>)}
+            </ul>
+            <a href="#appointment" className="nav-cta" onClick={() => setMenuOpen(false)}>Book Appointment</a>
+            <button className="hamburger" onClick={() => setMenuOpen(m => !m)} aria-label="Menu">
+              <span /><span /><span />
+            </button>
+            <button onClick={() => {
+              const html = document.documentElement;
+              const current = html.getAttribute('data-theme');
+              const next = current === 'dark' ? 'light' : 'dark';
+              html.setAttribute('data-theme', next);
+              localStorage.setItem('site-theme', next);
+            }} style={{
+              background: 'var(--card-bg)', border: '1.5px solid var(--border)',
+              borderRadius: '50%', width: '38px', height: '38px', cursor: 'pointer',
+              fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              transition: 'all 0.2s', marginLeft: '8px', color: 'var(--text)'
+            }} title="Toggle theme">
+              {document.documentElement.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙'}
+            </button>
+          </nav>
+          <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
+            {links.map(l => <a key={l} href={`#${l.toLowerCase()}`} onClick={() => setMenuOpen(false)}>{l}</a>)}
+            <a href="#appointment" style={{ color: 'var(--secondary)', fontWeight: 700 }} onClick={() => setMenuOpen(false)}>📅 Book Appointment</a>
+          </div>
+        </>
+      );
+    }
+
+    // ─── HERO ───
+    function Hero() {
+      return (
+        <section className="hero" id="hero">
+          <div className="hero-content page-load">
+            <div className="hero-badge">⭐ 5.0 Rating · 172+ Happy Patients</div>
+            <h1>Your Smile,<br /><span>Our Priority</span></h1>
+            <p>Expert dental care by Dr. Sivapriya at Thiru Dentistry, Padianallur. Experience compassionate, modern dentistry that puts your comfort first.</p>
+            <div className="hero-actions">
+              <a href="#appointment" className="btn-primary">📅 Book Appointment</a>
+              <a href="#services" className="btn-outline">Explore Services</a>
+            </div>
+            <div className="hero-stats">
+              <div className="stat"><div className="stat-num">172+</div><div className="stat-label">Happy Patients</div></div>
+              <div className="stat"><div className="stat-num">5.0</div><div className="stat-label">Google Rating</div></div>
+              <div className="stat"><div className="stat-num">6+</div><div className="stat-label">Specialties</div></div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // ─── ABOUT ───
+    function About() {
+      return (
+        <section className="section section-alt" id="about">
+          <div className="about-grid">
+            <div className="about-visual">
+              <div className="doc-avatar">👩‍⚕️</div>
+              <h3>Dr. Sivapriya</h3>
+              <p>Lead Dentist & Founder</p>
+              <div className="about-badge">🏆 Women-Owned Practice</div>
+              <div className="rating-badge">⭐ 5.0 · 172 Reviews</div>
+            </div>
+            <div className="about-content">
+              <div className="section-tag">About Us</div>
+              <h2>Caring for Smiles in Padianallur & Beyond</h2>
+              <p>Thiru Dentistry is a premier dental clinic located in M.A.Nagar, Padianallur, Tamil Nadu, dedicated to providing world-class oral healthcare to families in the community.</p>
+              <p>Led by Dr. Sivapriya, our women-owned practice combines advanced dental technology with a warm, patient-centered approach. We believe every patient deserves a comfortable experience and a healthy, beautiful smile.</p>
+              <p>From routine check-ups to complex implants and cosmetic procedures, we offer comprehensive dental solutions under one roof—all delivered with expertise and genuine care.</p>
+              <div className="about-features">
+                <div className="about-feat"><span className="feat-icon">✅</span>Advanced Equipment</div>
+                <div className="about-feat"><span className="feat-icon">✅</span>Painless Procedures</div>
+                <div className="about-feat"><span className="feat-icon">✅</span>Sterile Environment</div>
+                <div className="about-feat"><span className="feat-icon">✅</span>Expert Team</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // ─── SERVICES ───
+    function Services() {
+      return (
+        <section className="section" id="services">
+          <div className="section-header">
+            <div className="section-tag">Our Services</div>
+            <h2 className="section-title">Comprehensive Dental Care</h2>
+            <p className="section-subtitle">From preventive care to complex restorations, we offer a full range of dental treatments tailored to your needs.</p>
+          </div>
+          <div className="services-grid">
+            {SERVICES.map((s, i) => (
+              <div className="service-card" key={i}>
+                <div className="service-icon">{s.icon}</div>
+                <h3>{s.title}</h3>
+                <p>{s.desc}</p>
+                <a href="#appointment" className="service-link">Book Now →</a>
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+    }
+
+    // ─── TESTIMONIALS ───
+    function Testimonials() {
+      return (
+        <section className="section section-alt" id="testimonials">
+          <div className="section-header">
+            <div className="section-tag">Testimonials</div>
+            <h2 className="section-title">What Our Patients Say</h2>
+            <p className="section-subtitle">Real experiences from real patients. We're proud to have a perfect 5-star rating on Google.</p>
+          </div>
+          <div className="testimonials-grid">
+            {TESTIMONIALS.map((t, i) => (
+              <div className="testimonial-card" key={i}>
+                <div className="stars">★★★★★</div>
+                <p>"{t.text}"</p>
+                <div className="testimonial-author">
+                  <div className="author-avatar">{t.init}</div>
+                  <div><div className="author-name">{t.name}</div><div className="author-tag">{t.tag}</div></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+    }
+
+    // ─── APPOINTMENT FORM ───
+    function Appointment() {
+      const [form, setForm] = useState({ name: '', phone: '', service: '', date: '', time: '', message: '' });
+      const [status, setStatus] = useState(''); // 'loading' | 'success' | 'error'
+
+      const SERVICES_LIST = ['Root Canal Treatment', 'Dental Implants', 'Braces & Orthodontics', 'Tooth Extraction', 'Cosmetic Dentistry', 'General Dentistry', 'Other / Consultation'];
+
+      const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!form.name || !form.phone || !form.date) return;
+        setStatus('loading');
+        try {
+          // ─── RENDER BACKEND URL ───
+          // TODO: Replace with your actual Render URL after deploying
+          const RENDER_API = 'https://thiru-dentistry-api.onrender.com';
+          const apiBaseUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+            ? 'http://localhost:5000/api/appointments' 
+            : `${RENDER_API}/api/appointments`;
+          const res = await fetch(apiBaseUrl, {
+            method: 'POST', 
+            headers: {'Content-Type':'application/json'}, 
+            body: JSON.stringify(form)
+          });
+          
+          if (!res.ok) throw new Error('Network response was not ok');
+          
+          setStatus('success');
+          setForm({ name: '', phone: '', service: '', date: '', time: '', message: '' });
+        } catch {
+          setStatus('error');
+        }
+        setTimeout(() => setStatus(''), 5000);
+      };
+
+      return (
+        <section className="appointment-section" id="appointment">
+          <div className="appointment-grid">
+            <div className="apt-info">
+              <div className="section-tag" style={{ background: 'rgba(26,188,156,0.2)', color: '#1ABC9C' }}>Book Now</div>
+              <h2>Schedule Your Appointment Today</h2>
+              <p>Ready for a healthier, brighter smile? Fill in the form and our team will confirm your appointment promptly. Same-day appointments available!</p>
+              <div className="apt-info-items">
+                <div className="apt-info-item"><span>📍</span><span>Service Rd, M.A.Nagar, Padianallur, Tamil Nadu 600052</span></div>
+                <div className="apt-info-item"><span>📞</span><a href="tel:+919042636466" style={{ color: 'rgba(255,255,255,0.85)', textDecoration: 'none' }}>+91 90426 36466</a></div>
+                <div className="apt-info-item"><span>🕐</span><span>Mon–Sat: 9:00 AM – 7:00 PM | Sun: By Appointment</span></div>
+                <div className="apt-info-item"><span>⭐</span><span>5.0 Rated · 172 Google Reviews · Women-Owned</span></div>
+              </div>
+            </div>
+            <div className="apt-form">
+              <h3>📋 Request an Appointment</h3>
+              <form onSubmit={handleSubmit}>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" name="name" value={form.name} onChange={handleChange} placeholder="Your name" required />
+                  </div>
+                  <div className="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="+91 XXXXX XXXXX" required />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label>Service Needed</label>
+                  <select name="service" value={form.service} onChange={handleChange}>
+                    <option value="">Select a service...</option>
+                    {SERVICES_LIST.map(s => <option key={s} value={s}>{s}</option>)}
+                  </select>
+                </div>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label>Preferred Date *</label>
+                    <input type="date" name="date" value={form.date} onChange={handleChange} min={new Date().toISOString().split('T')[0]} required />
+                  </div>
+                  <div className="form-group">
+                    <label>Preferred Time</label>
+                    <select name="time" value={form.time} onChange={handleChange}>
+                      <option value="">Any time</option>
+                      {['9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM', '6:00 PM'].map(t => <option key={t} value={t}>{t}</option>)}
+                    </select>
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label>Message (optional)</label>
+                  <textarea name="message" value={form.message} onChange={handleChange} placeholder="Describe your concern or any questions..." rows={3} />
+                </div>
+                <button type="submit" className="form-submit" disabled={status === 'loading'}>
+                  {status === 'loading' ? '⏳ Submitting...' : '📅 Request Appointment'}
+                </button>
+              </form>
+              {status === 'success' && <div className="success-msg">✅ Appointment requested successfully! We'll call you shortly to confirm.</div>}
+              {status === 'error' && <div className="success-msg" style={{ borderColor: '#ef4444', color: '#ef4444', background: 'rgba(239,68,68,0.06)' }}>❌ Something went wrong. Please call us directly at +91 90426 36466.</div>}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // ─── CONTACT ───
+    function Contact() {
+      return (
+        <section className="section" id="contact">
+          <div className="section-header">
+            <div className="section-tag">Find Us</div>
+            <h2 className="section-title">Visit Thiru Dentistry</h2>
+            <p className="section-subtitle">Conveniently located in Padianallur. We're easy to find and always welcoming new patients.</p>
+          </div>
+          <div className="contact-grid">
+            <div className="contact-details">
+              <div className="contact-item">
+                <div className="contact-icon">📍</div>
+                <div>
+                  <h4>Address</h4>
+                  <p>Service Rd, M.A.Nagar<br />Padianallur, Tamil Nadu 600052<br />Plus Code: 652G+MM</p>
+                </div>
+              </div>
+              <div className="contact-item">
+                <div className="contact-icon">📞</div>
+                <div>
+                  <h4>Phone</h4>
+                  <a href="tel:+919042636466">+91 90426 36466</a>
+                </div>
+              </div>
+              <div className="contact-item">
+                <div className="contact-icon">🕐</div>
+                <div>
+                  <h4>Working Hours</h4>
+                  <p>Monday – Saturday: 9:00 AM – 7:00 PM<br />Sunday: By Appointment Only</p>
+                </div>
+              </div>
+              <div className="contact-item">
+                <div className="contact-icon">💬</div>
+                <div>
+                  <h4>WhatsApp</h4>
+                  <a href="https://wa.me/919042636466" target="_blank">Chat with us on WhatsApp</a>
+                </div>
+              </div>
+            </div>
+            <div className="map-container">
+              <iframe
+                src="https://www.google.com/maps?q=652G%2BMM+Padianallur,+Tamil+Nadu&output=embed"
+                width="100%" height="420"
+                style={{ border: 0 }} allowFullScreen loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Thiru Dentistry Location"
+              />
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // ─── FOOTER ───
+    function Footer() {
+      return (
+        <footer>
+          <div className="footer-grid">
+            <div className="footer-brand">
+              <div className="footer-logo">
+                <div className="footer-logo-icon">🦷</div>
+                <div className="footer-logo-text">Thiru Dentistry</div>
+              </div>
+              <p>Your trusted dental partner in Padianallur, Tamil Nadu. Delivering compassionate, high-quality dental care to our community.</p>
+              <div className="footer-socials">
+                <a href="https://wa.me/919042636466" className="social-btn" target="_blank" title="WhatsApp">💬</a>
+                <a href="#" className="social-btn" title="Facebook">📘</a>
+                <a href="#" className="social-btn" title="Instagram">📸</a>
+              </div>
+            </div>
+            <div className="footer-col">
+              <h4>Quick Links</h4>
+              <ul className="footer-links">
+                {['About', 'Services', 'Testimonials', 'Contact'].map(l => <li key={l}><a href={`#${l.toLowerCase()}`}>{l}</a></li>)}
+                <li><a href="#appointment">Book Appointment</a></li>
+              </ul>
+            </div>
+            <div className="footer-col">
+              <h4>Services</h4>
+              <ul className="footer-links">
+                {['Root Canal', 'Dental Implants', 'Braces', 'Cosmetic Dentistry', 'Tooth Extraction', 'General Dentistry'].map(s => <li key={s}><a href="#services">{s}</a></li>)}
+              </ul>
+            </div>
+            <div className="footer-col">
+              <h4>Contact Info</h4>
+              <ul className="footer-links">
+                <li><a href="tel:+919042636466">📞 +91 90426 36466</a></li>
+                <li><a href="https://wa.me/919042636466" target="_blank">💬 WhatsApp Us</a></li>
+                <li><a href="#contact">📍 Padianallur, TN 600052</a></li>
+                <li><a href="#appointment">📅 Book Appointment</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="footer-bottom">
+            <span>© 2025 Thiru Dentistry. All rights reserved. · Women-Owned Practice</span>
+            <span>Made with ❤️ for healthy smiles · <a href="#hero">Back to Top ↑</a></span>
+          </div>
+        </footer>
+      );
+    }
+
+    // ─── CHATBOT ───
+    const CHATBOT_RESPONSES = {
+      greet: ["Hello! 😊 Welcome to Thiru Dentistry! I'm your virtual assistant. How can I help you today?\n\n💡 I can help you with:\n• Book an appointment\n• Service information\n• Clinic hours & location\n• General dental queries"],
+      book: ["I'd love to help you book an appointment! 📅\n\nPlease fill out our quick booking form below, or I can collect your details here.\n\nCould you please share:\n1. Your full name\n2. Phone number\n3. Preferred date & service\n\nOr <a href='#appointment' style='color:var(--secondary)'>click here to book directly →</a>"],
+      hours: ["⏰ Our clinic hours:\n\n📅 Monday – Saturday: 9:00 AM – 7:00 PM\n📅 Sunday: By Appointment Only\n\nFeel free to call us at +91 90426 36466 or WhatsApp us anytime!"],
+      location: ["📍 We're located at:\n\nService Rd, M.A.Nagar, Padianallur\nTamil Nadu, India 600052\nPlus Code: 652G+MM\n\nEasy to find near M.A.Nagar. <a href='#contact' style='color:var(--secondary)'>See on map →</a>"],
+      implants: ["🦷 Dental Implants at Thiru Dentistry are a permanent solution for missing teeth. Dr. Sivapriya uses the latest techniques for natural-looking, long-lasting results.\n\nWould you like to book a consultation?"],
+      rootcanal: ["Root Canal Treatment is completely painless with modern techniques! 😊 We use advanced endodontic therapy to save infected teeth and relieve pain.\n\nDr. Sivapriya has extensive experience with root canals. Want to book an appointment?"],
+      braces: ["We offer both traditional braces and modern aligner options to give you the perfect smile! 😁 Treatment duration varies based on your case.\n\nBook a free orthodontic consultation today!"],
+      pain: ["We understand dental anxiety! 😌 Dr. Sivapriya and our team are known for their gentle, patient approach. All our procedures are designed to be as comfortable as possible.\n\nDon't let fear stop you from getting the care you need—we're here for you!"],
+      default: ["Thank you for your message! 😊 For specific queries, please call us at **+91 90426 36466** or <a href='https://wa.me/919042636466' target='_blank' style='color:var(--secondary)'>WhatsApp us</a>.\n\nYou can also <a href='#appointment' style='color:var(--secondary)'>book an appointment online →</a>"]
+    };
+
+    function detectIntent(msg) {
+      const m = msg.toLowerCase();
+      if (/(hi|hello|hey|namaste|good|greet)/i.test(m)) return 'greet';
+      if (/(book|appoint|schedule|visit|consult|fix|slot)/i.test(m)) return 'book';
+      if (/(hour|time|when|open|close|timing)/i.test(m)) return 'hours';
+      if (/(address|where|location|map|find|direction|how to reach)/i.test(m)) return 'location';
+      if (/(implant)/i.test(m)) return 'implants';
+      if (/(root canal|rct|endodon)/i.test(m)) return 'rootcanal';
+      if (/(brace|ortho|aligner|teeth straighten)/i.test(m)) return 'braces';
+      if (/(pain|afraid|scared|anxious|fear|hurt)/i.test(m)) return 'pain';
+      return 'default';
+    }
+
+    function Chatbot() {
+      const [open, setOpen] = useState(false);
+      const [messages, setMessages] = useState([
+        { role: 'bot', text: "👋 Hi! Welcome to Thiru Dentistry! I'm here to help you.\n\nHow can I assist you today?", time: now() }
+      ]);
+      const [input, setInput] = useState('');
+      const [typing, setTyping] = useState(false);
+      const bottomRef = useRef();
+
+      function now() {
+        return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      }
+
+      useEffect(() => {
+        if (bottomRef.current) bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+      }, [messages, typing]);
+
+      const sendMsg = async () => {
+        if (!input.trim()) return;
+        const userMsg = input.trim();
+        setInput('');
+        setMessages(m => [...m, { role: 'user', text: userMsg, time: now() }]);
+        setTyping(true);
+        await new Promise(r => setTimeout(r, 800 + Math.random() * 700));
+        const intent = detectIntent(userMsg);
+        const responses = CHATBOT_RESPONSES[intent] || CHATBOT_RESPONSES.default;
+        const reply = responses[Math.floor(Math.random() * responses.length)];
+        setTyping(false);
+        setMessages(m => [...m, { role: 'bot', text: reply, time: now() }]);
+      };
+
+      const handleKey = e => {
+        if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMsg(); }
+      };
+
+      return (
+        <>
+          <div className={`chat-window ${open ? '' : 'hidden'}`}>
+            <div className="chat-header">
+              <div className="chat-avatar">🦷</div>
+              <div className="chat-header-info">
+                <h4>Thiru Dentistry</h4>
+                <p><span className="chat-online" />AI Receptionist · Online</p>
+              </div>
+              <button className="chat-close" onClick={() => setOpen(false)}>✕</button>
+            </div>
+            <div className="chat-messages">
+              {messages.map((m, i) => (
+                <div key={i} className={`msg msg-${m.role}`}>
+                  <div dangerouslySetInnerHTML={{ __html: m.text.replace(/\n/g, '<br/>') }} />
+                  <div className="msg-time">{m.time}</div>
+                </div>
+              ))}
+              {typing && (
+                <div className="msg msg-bot">
+                  <div className="typing-indicator">
+                    <div className="typing-dot" /><div className="typing-dot" /><div className="typing-dot" />
+                  </div>
+                </div>
+              )}
+              <div ref={bottomRef} />
+            </div>
+            <div className="chat-input-area">
+              <textarea
+                className="chat-input" rows={1}
+                placeholder="Type your message..."
+                value={input} onChange={e => setInput(e.target.value)} onKeyDown={handleKey}
+              />
+              <button className="chat-send" onClick={sendMsg}>➤</button>
+            </div>
+          </div>
+          <button className="chat-fab" onClick={() => setOpen(o => !o)} title="Chat with us">
+            {open ? '✕' : '💬'}
+          </button>
+        </>
+      );
+    }
+
+    // ─── APP ───
+    function App() {
+      return (
+        <>
+          <Navbar />
+          <main>
+            <Hero />
+            <About />
+            <Services />
+            <Testimonials />
+            <Appointment />
+            <Contact />
+          </main>
+          <Footer />
+          <Chatbot />
+          <a href="https://wa.me/919498645958" className="whatsapp-fab" target="_blank" rel="noopener" title="WhatsApp Thiru Dentistry">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M20.52 3.48A11.93 11.93 0 0012.01 0C5.37 0 .01 5.36.01 12c0 2.12.55 4.18 1.6 6L0 24l6.24-1.64A11.94 11.94 0 0012.01 24c6.64 0 12-5.36 12-12 0-3.21-1.25-6.22-3.49-8.52zM12.01 22a9.94 9.94 0 01-5.07-1.38l-.36-.22-3.74.98 1-3.64-.24-.38A9.94 9.94 0 012 12c0-5.51 4.49-10 10.01-10 2.67 0 5.18 1.04 7.07 2.93A9.93 9.93 0 0122 12c0 5.51-4.49 10-9.99 10zm5.48-7.44c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.89-.79-1.48-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.44-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01s-.52.07-.79.37c-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.21 5.09 4.5.71.31 1.27.5 1.7.64.72.23 1.37.2 1.88.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.19-.57-.34z" /></svg>
+          </a>
+          <a href="tel:+919042636466" className="sticky-call">📞 Call Now: +91 90426 36466</a>
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+
+</html>
