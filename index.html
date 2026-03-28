@@ -46,9 +46,9 @@
       --text-light: #8a9bb5;
       --white: #162a3a;
       --card-bg: #162a3a;
-      --border: rgba(255,255,255,0.08);
-      --shadow: 0 4px 24px rgba(0,0,0,0.3);
-      --shadow-lg: 0 12px 48px rgba(0,0,0,0.4);
+      --border: rgba(255, 255, 255, 0.08);
+      --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.4);
     }
 
     *,
@@ -1398,7 +1398,7 @@
 <body>
   <script>
     // Init theme immediately to prevent flash
-    (function() {
+    (function () {
       var saved = localStorage.getItem('site-theme');
       if (saved) document.documentElement.setAttribute('data-theme', saved);
     })();
@@ -1592,17 +1592,17 @@
           // ─── RENDER BACKEND URL ───
           // TODO: Replace with your actual Render URL after deploying
           const RENDER_API = 'https://thiru-dentistry-api.onrender.com';
-          const apiBaseUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
-            ? 'http://localhost:5000/api/appointments' 
+          const apiBaseUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'https://dentist-website-p416.onrender.com/api/appointments'
             : `${RENDER_API}/api/appointments`;
           const res = await fetch(apiBaseUrl, {
-            method: 'POST', 
-            headers: {'Content-Type':'application/json'}, 
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(form)
           });
-          
+
           if (!res.ok) throw new Error('Network response was not ok');
-          
+
           setStatus('success');
           setForm({ name: '', phone: '', service: '', date: '', time: '', message: '' });
         } catch {
