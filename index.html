@@ -22,6 +22,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+    window.supabaseClient = createClient(
+      "https://glngxleabttdcdzayclk.supabase.co",
+      "sb_publishable_XXXXXXXX"
+    );
+  </script>
   <style>
     :root {
       --primary: #0A3D62;
@@ -1588,26 +1595,29 @@
         e.preventDefault();
         if (!form.name || !form.phone || !form.date) return;
         setStatus('loading');
-        try {
-          // ─── RENDER BACKEND URL ───
-          // TODO: Replace with your actual Render URL after deploying
-          const RENDER_API = 'https://thiru-dentistry-api.onrender.com';
-          const apiBaseUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-            ? 'https://dentist-website-p416.onrender.com/api/appointments'
-            : `${RENDER_API}/api/appointments`;
-          const res = await fetch(apiBaseUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(form)
-          });
 
-          if (!res.ok) throw new Error('Network response was not ok');
+        try {
+          const { error } = await window.supabaseClient
+            .from('appointments')
+            .insert([{
+              name: form.name,
+              phone: form.phone,
+              service: form.service || 'General Dentistry',
+              date: form.date,
+              time: form.time || 'Any time',
+              message: form.message || '',
+              status: 'pending'
+            }]);
+
+          if (error) throw error;
 
           setStatus('success');
           setForm({ name: '', phone: '', service: '', date: '', time: '', message: '' });
-        } catch {
+        } catch (error) {
+          console.error('Booking error:', error.message);
           setStatus('error');
         }
+
         setTimeout(() => setStatus(''), 5000);
       };
 
@@ -1908,39 +1918,3 @@
 </body>
 
 </html>
-
-<script>
-  const form = document.querySelector("form");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const data = {
-      name: form.name.value,
-      phone: form.phone.value,
-      date: form.date.value,
-      time: form.time.value
-    };
-
-    const res = await fetch("https://dentist-website-p416.onrender.com/appointments", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    });
-
-    const result = await res.json();
-
-    if (result.success) {
-      alert("Appointment booked successfully!");
-    } else {
-      alert("Something went wrong!");
-    }
-  });
-</script>
-
-<input name="name" />
-<input name="phone" />
-<input name="date" />
-<input name="time" />
