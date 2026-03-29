@@ -1908,3 +1908,39 @@
 </body>
 
 </html>
+
+<script>
+  const form = document.querySelector("form");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const data = {
+      name: form.name.value,
+      phone: form.phone.value,
+      date: form.date.value,
+      time: form.time.value
+    };
+
+    const res = await fetch("https://dentist-website-p416.onrender.com/appointments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+
+    if (result.success) {
+      alert("Appointment booked successfully!");
+    } else {
+      alert("Something went wrong!");
+    }
+  });
+</script>
+
+<input name="name" />
+<input name="phone" />
+<input name="date" />
+<input name="time" />
