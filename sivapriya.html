@@ -918,7 +918,7 @@
 
     const supabase = createClient(
       "https://glngxleabttdcdzayclk.supabase.co",
-      "sb_publishable_XXXXXXXX"
+      "sb_publishable_U4lGEzaJcGvbgFbXEbcuSg_9UfQg4oR"
     );
 
     // ─── AUTHENTICATION ───
@@ -930,7 +930,7 @@
     let allAppointments = [];
 
     // ─── THEME TOGGLE ───
-    window.toggleTheme = function() {
+    window.toggleTheme = function () {
       const html = document.documentElement;
       const current = html.getAttribute('data-theme');
       const next = current === 'light' ? 'dark' : 'light';
@@ -947,7 +947,7 @@
     })();
 
     // ─── LOAD APPOINTMENTS ───
-    window.loadAppointments = async function(showFeedback = false) {
+    window.loadAppointments = async function (showFeedback = false) {
       const content = document.getElementById('tableContent');
       if (showFeedback || allAppointments.length === 0) {
         content.innerHTML = '<div class="loading"><div class="spinner"></div><p>Loading appointments...</p></div>';
@@ -1053,7 +1053,7 @@
     }
 
     // ─── FILTER ───
-    window.filterTable = function() {
+    window.filterTable = function () {
       const search = document.getElementById('searchBox').value.toLowerCase();
       const status = document.getElementById('statusFilter').value;
       const date = document.getElementById('dateFilter').value;
@@ -1071,7 +1071,7 @@
     };
 
     // ─── UPDATE STATUS ───
-    window.updateStatus = async function(id, status) {
+    window.updateStatus = async function (id, status) {
       try {
         const { error } = await supabase
           .from('appointments')
@@ -1087,7 +1087,7 @@
     };
 
     // ─── DELETE ───
-    window.deleteAppointment = function(id, name) {
+    window.deleteAppointment = function (id, name) {
       window.showModal(
         '🗑️ Delete Appointment',
         `Are you sure you want to delete the appointment for <strong>${name}</strong>? This action cannot be undone.`,
@@ -1098,7 +1098,7 @@
       );
     };
 
-    window.confirmDelete = async function(id) {
+    window.confirmDelete = async function (id) {
       window.closeModal();
       try {
         const { error } = await supabase
@@ -1115,7 +1115,7 @@
     };
 
     // ─── VIEW DETAIL ───
-    window.viewAppointment = function(id) {
+    window.viewAppointment = function (id) {
       const appt = allAppointments.find(a => a.id === id);
       if (!appt) return;
       const created = new Date(appt.created_at || new Date()).toLocaleString('en-IN');
@@ -1129,19 +1129,19 @@
          <div class="detail-label">Message</div><div class="detail-value">${escHtml(appt.message || 'None')}</div>
          <div class="detail-label">Status</div><div class="detail-value"><span class="badge badge-${appt.status}">${appt.status}</span></div>
          <div class="detail-label">Booked On</div><div class="detail-value">${created}</div>
-         <div style="margin-top:16px"><a href="https://wa.me/91${(appt.phone||'').replace(/[^0-9]/g, '')}" target="_blank" class="btn btn-primary btn-sm" style="display:inline-flex;text-decoration:none">💬 WhatsApp Patient</a></div>`,
+         <div style="margin-top:16px"><a href="https://wa.me/91${(appt.phone || '').replace(/[^0-9]/g, '')}" target="_blank" class="btn btn-primary btn-sm" style="display:inline-flex;text-decoration:none">💬 WhatsApp Patient</a></div>`,
         [{ label: 'Close', class: 'btn btn-outline', action: 'window.closeModal()' }]
       );
     };
 
     // ─── EMAIL SECTON (Removed backend dependency) ───
-    window.checkEmail = function() {
+    window.checkEmail = function () {
       const statusEl = document.getElementById('emailStatus');
       const configEl = document.getElementById('emailConfig');
-      
+
       statusEl.className = 'email-status ok';
       statusEl.innerHTML = '✅ Supabase Database Connected. Email triggers can be configured via Supabase Edge Functions or Webhooks.';
-      
+
       configEl.innerHTML = `
         <div class="email-config-item">
           <div class="config-label">Database</div>
@@ -1154,7 +1154,7 @@
     };
 
     // ─── TOAST ───
-    window.showToast = function(message, type = 'info') {
+    window.showToast = function (message, type = 'info') {
       const container = document.getElementById('toastContainer');
       const toast = document.createElement('div');
       toast.className = `toast ${type}`;
@@ -1165,7 +1165,7 @@
     };
 
     // ─── MODAL ───
-    window.showModal = function(title, body, buttons) {
+    window.showModal = function (title, body, buttons) {
       const btns = buttons.map(b => `<button class="${b.class}" onclick="${b.action}">${b.label}</button>`).join('');
       document.getElementById('modalContainer').innerHTML = `
         <div class="modal-overlay" onclick="window.closeModal()">
@@ -1177,7 +1177,7 @@
         </div>`;
     };
 
-    window.closeModal = function() {
+    window.closeModal = function () {
       document.getElementById('modalContainer').innerHTML = '';
     };
 
@@ -1188,49 +1188,49 @@
       return div.innerHTML;
     }
 
-    window.scrollToTable = function() {
+    window.scrollToTable = function () {
       document.getElementById('tableSection').scrollIntoView({ behavior: 'smooth' });
     };
 
-    window.scrollToEmail = function() {
+    window.scrollToEmail = function () {
       document.getElementById('emailSection').scrollIntoView({ behavior: 'smooth' });
     };
 
     // ─── BOOKING SYSTEM (Added for frontend integration) ───
-    window.submitBooking = async function(e, formElement) {
-       e.preventDefault();
-       try {
-         const btn = formElement.querySelector('button[type="submit"]');
-         const origText = btn.innerText;
-         btn.innerText = 'Submitting...';
-         btn.disabled = true;
+    window.submitBooking = async function (e, formElement) {
+      e.preventDefault();
+      try {
+        const btn = formElement.querySelector('button[type="submit"]');
+        const origText = btn.innerText;
+        btn.innerText = 'Submitting...';
+        btn.disabled = true;
 
-         const { error } = await supabase.from('appointments').insert([{
-           name: formElement.name.value,
-           phone: formElement.phone.value,
-           service: formElement.service.value,
-           date: formElement.date.value,
-           time: formElement.time.value,
-           message: formElement.message.value,
-           status: 'pending'
-         }]);
+        const { error } = await supabase.from('appointments').insert([{
+          name: formElement.name.value,
+          phone: formElement.phone.value,
+          service: formElement.service.value,
+          date: formElement.date.value,
+          time: formElement.time.value,
+          message: formElement.message.value,
+          status: 'pending'
+        }]);
 
-         if (error) throw error;
-         
-         alert("Appointment booked successfully! We will contact you soon.");
-         formElement.reset();
-       } catch (err) {
-         console.error(err);
-         alert("Something went wrong! " + err.message);
-       } finally {
-         const btn = formElement.querySelector('button[type="submit"]');
-         btn.innerText = 'Request Appointment';
-         btn.disabled = false;
-       }
+        if (error) throw error;
+
+        alert("Appointment booked successfully! We will contact you soon.");
+        formElement.reset();
+      } catch (err) {
+        console.error(err);
+        alert("Something went wrong! " + err.message);
+      } finally {
+        const btn = formElement.querySelector('button[type="submit"]');
+        btn.innerText = 'Request Appointment';
+        btn.disabled = false;
+      }
     };
 
     // ─── DOWNLOAD EXCEL ───
-    window.downloadExcel = function() {
+    window.downloadExcel = function () {
       if (allAppointments.length === 0) {
         window.showToast('No appointments to export', 'error');
         return;
@@ -1272,7 +1272,7 @@
     window.checkEmail();
 
     setInterval(window.loadAppointments, 30000);
-</script>
+  </script>
 </body>
 
 </html>
