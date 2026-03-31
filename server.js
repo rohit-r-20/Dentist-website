@@ -110,6 +110,48 @@ apiRouter.post('/appointments', async (req, res) => {
   }
 });
 
+// ─── SEND EMAIL ───
+apiRouter.post('/send-email', async (req, res) => {
+  try {
+    const { name, phone, service, date, time, message, recipientEmail } = req.body;
+    if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
+      });
+      await transporter.verify();
+      await transporter.sendMail({
+        from: `"Thiru Dentistry" <${process.env.EMAIL_USER}>`,
+        to: recipientEmail || process.env.NOTIFICATION_EMAIL || process.env.EMAIL_USER,
+        subject: `🦷 New Dental Appointment: ${name}`,
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+            <div style="background: linear-gradient(135deg, #0A3D62, #1ABC9C); padding: 24px; border-radius: 12px 12px 0 0; color: white;">
+              <h2 style="margin: 0;">🦷 New Appointment Request</h2>
+              <p style="margin: 8px 0 0; opacity: 0.9;">Thiru Dentistry — Padianallur</p>
+            </div>
+            <div style="background: #f9f9f9; padding: 24px; border: 1px solid #e0e0e0;">
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr><td style="padding: 8px 0; font-weight: bold;">👤 Name:</td><td>${name}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">📞 Phone:</td><td><a href="tel:${phone}">${phone}</a></td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">🩺 Service:</td><td>${service || 'Not specified'}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">📅 Date:</td><td>${date}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">🕐 Time:</td><td>${time || 'Any time'}</td></tr>
+                <tr><td style="padding: 8px 0; font-weight: bold;">💬 Message:</td><td>${message || 'None'}</td></tr>
+              </table>
+            </div>
+          </div>`,
+      });
+      res.json({ success: true, message: 'Email sent successfully' });
+    } else {
+      res.status(500).json({ error: 'Server email configuration is missing.' });
+    }
+  } catch (err) {
+    console.error('Email sending error:', err.message);
+    res.status(500).json({ error: 'Failed to send email.' });
+  }
+});
+
 // ─── GET APPOINTMENTS ───
 apiRouter.get('/appointments', async (req, res) => {
   try {
