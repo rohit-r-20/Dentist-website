@@ -1710,7 +1710,7 @@
               <div className="apt-info-items">
                 <div className="apt-info-item"><span>📍</span><span>Service Rd, M.A.Nagar, Padianallur, Tamil Nadu 600052</span></div>
                 <div className="apt-info-item"><span>📞</span><a href="tel:+919042636466" style={{ color: 'rgba(255,255,255,0.85)', textDecoration: 'none' }}>+91 90426 36466</a></div>
-                <div className="apt-info-item"><span>🕐</span><span>Mon–Sat: 9:00 AM – 7:00 PM | Sun: By Appointment</span></div>
+                <div className="apt-info-item"><span>🕐</span><span>Mon–Sat: 10:00 AM – 1:00 PM, 5:00 PM – 9:00 PM | Sun: By Appointment</span></div>
                 <div className="apt-info-item"><span>⭐</span><span>5.0 Rated · 172 Google Reviews · Women-Owned</span></div>
               </div>
             </div>
@@ -1743,7 +1743,7 @@
                     <label>Preferred Time</label>
                     <select name="time" value={form.time} onChange={handleChange}>
                       <option value="">Any time</option>
-                      {['9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM', '6:00 PM'].map(t => <option key={t} value={t}>{t}</option>)}
+                      {['10:00 AM', '11:00 AM', '12:00 PM', '5:00 PM', '6:00 PM', '7:00 PM', '8:00 PM'].map(t => <option key={t} value={t}>{t}</option>)}
                     </select>
                   </div>
                 </div>
@@ -1792,7 +1792,7 @@
                 <div className="contact-icon">🕐</div>
                 <div>
                   <h4>Working Hours</h4>
-                  <p>Monday – Saturday: 9:00 AM – 7:00 PM<br />Sunday: By Appointment Only</p>
+                  <p>Monday – Saturday: 10:00 AM – 1:00 PM, 5:00 PM – 9:00 PM<br />Sunday: By Appointment Only</p>
                 </div>
               </div>
               <div className="contact-item">
@@ -1869,7 +1869,7 @@
     const CHATBOT_RESPONSES = {
       greet: ["Hello! 😊 Welcome to Thiru Dentistry! I'm your virtual assistant. How can I help you today?\n\n💡 I can help you with:\n• Book an appointment\n• Service information\n• Clinic hours & location\n• General dental queries"],
       book: ["I'd love to help you book an appointment! 📅\n\nPlease fill out our quick booking form below, or I can collect your details here.\n\nCould you please share:\n1. Your full name\n2. Phone number\n3. Preferred date & service\n\nOr <a href='#appointment' style='color:var(--secondary)'>click here to book directly →</a>"],
-      hours: ["⏰ Our clinic hours:\n\n📅 Monday – Saturday: 9:00 AM – 7:00 PM\n📅 Sunday: By Appointment Only\n\nFeel free to call us at +91 90426 36466 or WhatsApp us anytime!"],
+      hours: ["⏰ Our clinic hours:\n\n📅 Monday – Saturday: 10:00 AM – 1:00 PM & 5:00 PM – 9:00 PM\n📅 Sunday: By Appointment Only\n\nFeel free to call us at +91 90426 36466 or WhatsApp us anytime!"],
       location: ["📍 We're located at:\n\nService Rd, M.A.Nagar, Padianallur\nTamil Nadu, India 600052\nPlus Code: 652G+MM\n\nEasy to find near M.A.Nagar. <a href='#contact' style='color:var(--secondary)'>See on map →</a>"],
       implants: ["🦷 Dental Implants at Thiru Dentistry are a permanent solution for missing teeth. Our experienced doctors, Dr. Sivapriya MDS and Dr. Thirukumaran BDS, use the latest techniques for natural-looking, long-lasting results.\n\nWould you like to book a consultation?"],
       rootcanal: ["Root Canal Treatment is completely painless with modern techniques! 😊 We use advanced endodontic therapy to save infected teeth and relieve pain.\n\nDr. Sivapriya MDS and Dr. Thirukumaran BDS have extensive experience with root canals. Want to book an appointment?"],
