@@ -1456,12 +1456,17 @@
 
     // ─── DATA ───
     const SERVICES = [
-      { icon: "🦷", title: "Root Canal Treatment", desc: "Advanced endodontic therapy to save infected teeth, relieve pain, and restore function with precision and care." },
-      { icon: "🔩", title: "Dental Implants", desc: "Permanent, natural-looking implants to replace missing teeth—restoring your smile and bite with lasting results." },
-      { icon: "😁", title: "Braces & Orthodontics", desc: "Traditional braces and modern aligner options to straighten teeth and achieve the perfect smile alignment." },
-      { icon: "🩺", title: "Tooth Extraction", desc: "Safe, gentle extractions including wisdom teeth removal with minimal discomfort and quick recovery." },
-      { icon: "✨", title: "Cosmetic Dentistry", desc: "Teeth whitening, veneers, and smile makeovers to enhance your confidence and appearance." },
-      { icon: "🏥", title: "General Dentistry", desc: "Comprehensive check-ups, cleanings, fillings, and preventive care to keep your oral health at its best." }
+      { icon: "👶", title: "Pediatric Dentistry", desc: "Specialized, gentle dental care designed specifically for infants, children, and teens in a warm, friendly environment." },
+      { icon: "👴", title: "Geriatric Dentistry", desc: "Tailored oral healthcare for older adults, focusing on age-related dental issues, comfort, and custom treatment plans." },
+      { icon: "✨", title: "Scaling & Polishing", desc: "Professional teeth cleaning to remove plaque, tartar, and surface stains, keeping your gums healthy and your smile bright." },
+      { icon: "🏥", title: "Restorative Dentistry", desc: "Advanced fillings, inlays, and onlays to repair decayed, broken, or fractured teeth and restore their natural strength." },
+      { icon: "💎", title: "Dental Veneers", desc: "Custom-made, ultra-thin porcelain or composite shells bonded to the front of teeth to create a flawless, aesthetic smile." },
+      { icon: "🔩", title: "Dental Implants", desc: "Permanent, natural-looking implant restorations to replace missing teeth and restore your full chewing ability." },
+      { icon: "👑", title: "Crowns & Bridges", desc: "Custom-fit dental crowns and bridges to cover damaged teeth or fill gaps, restoring both function and appearance." },
+      { icon: "🦷", title: "Dentures", desc: "High-quality complete or partial dentures to restore chewing ability, aesthetics, and speech for patients with missing teeth." },
+      { icon: "🩹", title: "Root Canal Treatment", desc: "Advanced endodontic therapy to save infected teeth, relieve pain, and restore function with maximum precision." },
+      { icon: "😁", title: "Orthodontics - Braces", desc: "Traditional braces and modern aligner options to straighten misaligned teeth and achieve the perfect smile alignment." },
+      { icon: "🩺", title: "Impactions & Extractions", desc: "Safe, gentle removal of damaged, decayed, or impacted wisdom teeth with minimal discomfort and quick recovery." }
     ];
 
     const TESTIMONIALS = [
@@ -1634,7 +1639,20 @@
       const [form, setForm] = useState({ name: '', phone: '', service: '', date: '', time: '', message: '' });
       const [status, setStatus] = useState(''); // 'loading' | 'success' | 'error'
 
-      const SERVICES_LIST = ['Root Canal Treatment', 'Dental Implants', 'Braces & Orthodontics', 'Tooth Extraction', 'Cosmetic Dentistry', 'General Dentistry', 'Other / Consultation'];
+      const SERVICES_LIST = [
+        'Pediatric dentistry',
+        'Geriatric dentistry',
+        'Scaling and polishing',
+        'Restorative dentistry',
+        'Dental Veneers',
+        'Dental Implants',
+        'Crowns & Bridges',
+        'Dentures',
+        'Root Canal Treatment',
+        'Orthodontics - Braces',
+        'Impactions and extractions',
+        'Other / Consultation'
+      ];
 
       const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
 
@@ -1649,7 +1667,7 @@
             .insert([{
               name: form.name,
               phone: form.phone,
-              service: form.service || 'General Dentistry',
+              service: form.service || 'Other / Consultation',
               date: form.date,
               time: form.time || 'Any time',
               message: form.message || '',
@@ -1826,7 +1844,7 @@
             <div className="footer-col">
               <h4>Services</h4>
               <ul className="footer-links">
-                {['Root Canal', 'Dental Implants', 'Braces', 'Cosmetic Dentistry', 'Tooth Extraction', 'General Dentistry'].map(s => <li key={s}><a href="#services">{s}</a></li>)}
+                {['Pediatric Dentistry', 'Geriatric Dentistry', 'Scaling & Polishing', 'Restorative Dentistry', 'Dental Veneers', 'Dental Implants', 'Crowns & Bridges', 'Dentures', 'Root Canal Treatment', 'Orthodontics - Braces', 'Impactions & Extractions'].map(s => <li key={s}><a href="#services">{s}</a></li>)}
               </ul>
             </div>
             <div className="footer-col">
