@@ -6,7 +6,8 @@
     { "src": "sivapriya.html", "use": "@vercel/static" },
     { "src": "favicon.png", "use": "@vercel/static" },
     { "src": "favicon.svg", "use": "@vercel/static" },
-    { "src": "Thiru-BG.jpg", "use": "@vercel/static" }
+    { "src": "Thiru-BG.jpg", "use": "@vercel/static" },
+    { "src": "Thiru-mobile.jpg", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/index.js" },
@@ -14,6 +15,7 @@
     { "src": "/favicon.png", "dest": "/favicon.png" },
     { "src": "/favicon.svg", "dest": "/favicon.svg" },
     { "src": "/Thiru-BG.jpg", "dest": "/Thiru-BG.jpg" },
+    { "src": "/Thiru-mobile.jpg", "dest": "/Thiru-mobile.jpg" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
