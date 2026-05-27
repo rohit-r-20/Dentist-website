@@ -187,10 +187,14 @@ apiRouter.delete('/appointments/:id', async (req, res) => {
 });
 
 // ─── CHATBOT ───
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const apiKey = process.env.OPENAI_API_KEY || process.env.APIKEY;
+const openai = apiKey ? new OpenAI({ apiKey }) : null;
 
 apiRouter.post('/chat', async (req, res) => {
   try {
+    if (!openai) {
+      return res.status(503).json({ error: "Chat unavailable" });
+    }
     const { messages } = req.body;
 
     const completion = await openai.chat.completions.create({

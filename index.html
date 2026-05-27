@@ -9,7 +9,7 @@
   <meta name="description"
     content="Thiru Dentistry in Padianallur, Tamil Nadu offers expert dental care including implants, braces, root canals & cosmetic dentistry. Book an appointment today!" />
   <meta name="keywords"
-    content="dental clinic Chennai, dentist Padianallur, Thiru Dentistry, Dr Sivapriya, dental implants, braces, root canal" />
+    content="dental clinic Chennai, dentist Padianallur, Thiru Dentistry, Dr Sivapriya, Dr Thirukumaran, dental implants, braces, root canal" />
   <meta name="author" content="Thiru Dentistry" />
   <meta property="og:title" content="Thiru Dentistry | Your Smile, Our Priority" />
   <meta property="og:description"
@@ -476,6 +476,41 @@
       font-size: 0.78rem;
       font-weight: 600;
       margin-top: 16px;
+    }
+
+    /* ─── MULTIPLE DOCTORS LAYOUT ─── */
+    .doctors-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      width: 100%;
+    }
+
+    .doc-card {
+      min-height: auto !important;
+      padding: 35px 20px !important;
+      height: 100%;
+    }
+
+    .doc-specialty {
+      font-size: 0.8rem !important;
+      color: var(--secondary) !important;
+      font-weight: 700;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .doc-role {
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 6px;
+    }
+
+    @media (max-width: 576px) {
+      .doctors-wrapper {
+        grid-template-columns: 1fr;
+      }
     }
 
     .about-content h2 {
@@ -1490,7 +1525,7 @@
           <div className="hero-content page-load">
             <div className="hero-badge">⭐ 5.0 Rating · 172+ Happy Patients</div>
             <h1>Your Smile,<br /><span>Our Priority</span></h1>
-            <p>Expert dental care by Dr. Sivapriya at Thiru Dentistry, Padianallur. Experience compassionate, modern dentistry that puts your comfort first.</p>
+            <p>Expert dental care by Dr. Sivapriya MDS and Dr. Thirukumaran BDS at Thiru Dentistry, Padianallur. Experience compassionate, modern dentistry that puts your comfort first.</p>
             <div className="hero-actions">
               <a href="#appointment" className="btn-primary">📅 Book Appointment</a>
               <a href="#services" className="btn-outline">Explore Services</a>
@@ -1510,18 +1545,27 @@
       return (
         <section className="section section-alt" id="about">
           <div className="about-grid">
-            <div className="about-visual">
-              <div className="doc-avatar">👩‍⚕️</div>
-              <h3>Dr. Sivapriya</h3>
-              <p>Lead Dentist & Founder</p>
-              <div className="about-badge">🏆 Women-Owned Practice</div>
-              <div className="rating-badge">⭐ 5.0 · 172 Reviews</div>
+            <div className="doctors-wrapper">
+              <div className="about-visual doc-card">
+                <div className="doc-avatar">👩‍⚕️</div>
+                <h3>Dr. Sivapriya MDS</h3>
+                <p className="doc-specialty">Pediatric & Preventive Dentistry</p>
+                <span className="doc-role">Lead Dentist & Founder</span>
+                <div className="rating-badge">⭐ 5.0 · 172 Reviews</div>
+              </div>
+              <div className="about-visual doc-card">
+                <div className="doc-avatar">👨‍⚕️</div>
+                <h3>Dr. Thirukumaran BDS</h3>
+                <p className="doc-specialty">General Dentistry</p>
+                <span className="doc-role">General Dentist</span>
+                <div className="rating-badge">⭐ 5.0 Rated</div>
+              </div>
             </div>
             <div className="about-content">
               <div className="section-tag">About Us</div>
               <h2>Caring for Smiles in Padianallur & Beyond</h2>
               <p>Thiru Dentistry is a premier dental clinic located in M.A.Nagar, Padianallur, Tamil Nadu, dedicated to providing world-class oral healthcare to families in the community.</p>
-              <p>Led by Dr. Sivapriya, our women-owned practice combines advanced dental technology with a warm, patient-centered approach. We believe every patient deserves a comfortable experience and a healthy, beautiful smile.</p>
+              <p>Led by Dr. Sivapriya MDS and Dr. Thirukumaran BDS, our practice combines advanced dental technology with a warm, patient-centered approach. We believe every patient deserves a comfortable experience and a healthy, beautiful smile.</p>
               <p>From routine check-ups to complex implants and cosmetic procedures, we offer comprehensive dental solutions under one roof—all delivered with expertise and genuine care.</p>
               <div className="about-features">
                 <div className="about-feat"><span className="feat-icon">✅</span>Advanced Equipment</div>
@@ -1794,7 +1838,7 @@
             </div>
           </div>
           <div className="footer-bottom">
-            <span>© 2025 Thiru Dentistry. All rights reserved. · Women-Owned Practice</span>
+            <span>© 2025 Thiru Dentistry. All rights reserved. · Expert Dental Care</span>
             <span>Made with ❤️ for healthy smiles · <a href="#hero">Back to Top ↑</a></span>
           </div>
         </footer>
@@ -1807,10 +1851,10 @@
       book: ["I'd love to help you book an appointment! 📅\n\nPlease fill out our quick booking form below, or I can collect your details here.\n\nCould you please share:\n1. Your full name\n2. Phone number\n3. Preferred date & service\n\nOr <a href='#appointment' style='color:var(--secondary)'>click here to book directly →</a>"],
       hours: ["⏰ Our clinic hours:\n\n📅 Monday – Saturday: 9:00 AM – 7:00 PM\n📅 Sunday: By Appointment Only\n\nFeel free to call us at +91 90426 36466 or WhatsApp us anytime!"],
       location: ["📍 We're located at:\n\nService Rd, M.A.Nagar, Padianallur\nTamil Nadu, India 600052\nPlus Code: 652G+MM\n\nEasy to find near M.A.Nagar. <a href='#contact' style='color:var(--secondary)'>See on map →</a>"],
-      implants: ["🦷 Dental Implants at Thiru Dentistry are a permanent solution for missing teeth. Dr. Sivapriya uses the latest techniques for natural-looking, long-lasting results.\n\nWould you like to book a consultation?"],
-      rootcanal: ["Root Canal Treatment is completely painless with modern techniques! 😊 We use advanced endodontic therapy to save infected teeth and relieve pain.\n\nDr. Sivapriya has extensive experience with root canals. Want to book an appointment?"],
+      implants: ["🦷 Dental Implants at Thiru Dentistry are a permanent solution for missing teeth. Our experienced doctors, Dr. Sivapriya MDS and Dr. Thirukumaran BDS, use the latest techniques for natural-looking, long-lasting results.\n\nWould you like to book a consultation?"],
+      rootcanal: ["Root Canal Treatment is completely painless with modern techniques! 😊 We use advanced endodontic therapy to save infected teeth and relieve pain.\n\nDr. Sivapriya MDS and Dr. Thirukumaran BDS have extensive experience with root canals. Want to book an appointment?"],
       braces: ["We offer both traditional braces and modern aligner options to give you the perfect smile! 😁 Treatment duration varies based on your case.\n\nBook a free orthodontic consultation today!"],
-      pain: ["We understand dental anxiety! 😌 Dr. Sivapriya and our team are known for their gentle, patient approach. All our procedures are designed to be as comfortable as possible.\n\nDon't let fear stop you from getting the care you need—we're here for you!"],
+      pain: ["We understand dental anxiety! 😌 Dr. Sivapriya MDS, Dr. Thirukumaran BDS, and our team are known for their gentle, patient approach. All our procedures are designed to be as comfortable as possible.\n\nDon't let fear stop you from getting the care you need—we're here for you!"],
       default: ["Thank you for your message! 😊 For specific queries, please call us at **+91 90426 36466** or <a href='https://wa.me/919042636466' target='_blank' style='color:var(--secondary)'>WhatsApp us</a>.\n\nYou can also <a href='#appointment' style='color:var(--secondary)'>book an appointment online →</a>"]
     };
 
