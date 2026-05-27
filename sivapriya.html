@@ -1318,13 +1318,14 @@
       }
       let html = `<div style="overflow-x:auto"><table>
       <thead><tr>
-        <th>Patient</th><th>Service</th><th>Date / Time</th><th>Message</th><th>Status</th><th>Booked On</th><th>Actions</th>
+        <th style="width: 60px; text-align: center;">S.No.</th><th>Patient</th><th>Service</th><th>Date / Time</th><th>Message</th><th>Status</th><th>Booked On</th><th>Actions</th>
       </tr></thead><tbody>`;
-      appts.forEach(a => {
+      appts.forEach((a, index) => {
         const booked = a.created_at ? new Date(a.created_at).toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '—';
         const badgeCls = a.status === 'done' ? 'badge-done' : `badge-${a.status}`;
         const statusLabel = a.status === 'done' ? '✅ Done' : a.status === 'confirmed' ? '✅ Confirmed' : a.status === 'pending' ? '⏳ Pending' : '❌ Cancelled';
         html += `<tr>
+        <td style="font-weight: 600; color: var(--text2); text-align: center;">${index + 1}</td>
         <td>
           <div class="pt-name">${esc(a.name)}</div>
           <div class="pt-phone"><a href="tel:${esc(a.phone)}">${esc(a.phone)}</a></div>
