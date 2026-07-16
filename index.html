@@ -24,10 +24,29 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
   <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-    window.supabaseClient = createClient(
-      "https://glngxleabttdcdzayclk.supabase.co",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdsbmd4bGVhYnR0ZGNkemF5Y2xrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3NzE2MjQsImV4cCI6MjA5MDM0NzYyNH0.Krcjt09P4vjfqRZhwKNr2xUQwpfv0LFjz2_BWvCwkAc"
+    const supabase = createClient(
+      "https://tclcbetlqwlpxgtmkrkr.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRjbGNiZXRscXdscHhndG1rcmtyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQyMDEwMDIsImV4cCI6MjA5OTc3NzAwMn0.Ea37n8zCkt_sXXqF4BWF_YN8DYjVwM6-3lnPNTM0i4A"
     );
+    window.supabaseClient = supabase;
+
+    window.db = {
+      async insertAppointment(appt) {
+        try {
+          const { error } = await supabase.from('appointments').insert([appt]);
+          if (error) throw error;
+          return { success: true, mode: 'supabase' };
+        } catch (err) {
+          console.warn("Supabase insert failed, falling back to localStorage:", err.message);
+          const localData = JSON.parse(localStorage.getItem('thiru_appointments') || '[]');
+          appt.id = 'local_' + Math.random().toString(36).substr(2, 9);
+          appt.created_at = new Date().toISOString();
+          localData.unshift(appt);
+          localStorage.setItem('thiru_appointments', JSON.stringify(localData));
+          return { success: true, mode: 'local' };
+        }
+      }
+    };
   </script>
   <style>
     :root {
@@ -1662,35 +1681,35 @@
         setStatus('loading');
 
         try {
-          const { error } = await window.supabaseClient
-            .from('appointments')
-            .insert([{
-              name: form.name,
-              phone: form.phone,
-              service: form.service || 'Other / Consultation',
-              date: form.date,
-              time: form.time || 'Any time',
-              message: form.message || '',
-              status: 'pending'
-            }]);
+          const res = await window.db.insertAppointment({
+            name: form.name,
+            phone: form.phone,
+            service: form.service || 'Other / Consultation',
+            date: form.date,
+            time: form.time || 'Any time',
+            message: form.message || '',
+            status: 'pending'
+          });
 
-          if (error) throw error;
+          if (!res.success) throw new Error("Failed to insert appointment");
 
           // Trigger email notification via backend
-          try {
-            await fetch('https://glngxleabttdcdzayclk.supabase.co/functions/v1/send-email', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                ...form,
-                recipientEmail: 'andersonjuds01@gmail.com' // <-- Update with your actual email
-              })
-            });
-          } catch(emailErr) {
-            console.error('Email staging error:', emailErr);
+          if (res.mode === 'supabase') {
+            try {
+              await fetch('https://glngxleabttdcdzayclk.supabase.co/functions/v1/send-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  ...form,
+                  recipientEmail: 'andersonjuds01@gmail.com' // <-- Update with your actual email
+                })
+              });
+            } catch(emailErr) {
+              console.error('Email staging error:', emailErr);
+            }
           }
 
-          setStatus('success');
+          setStatus(res.mode === 'local' ? 'local_success' : 'success');
           setForm({ name: '', phone: '', service: '', date: '', time: '', message: '' });
         } catch (error) {
           console.error('Booking error:', error.message);
@@ -1756,6 +1775,7 @@
                 </button>
               </form>
               {status === 'success' && <div className="success-msg">✅ Appointment requested successfully! We'll call you shortly to confirm.</div>}
+              {status === 'local_success' && <div className="success-msg" style={{ borderColor: '#eab308', color: '#eab308', background: 'rgba(234,179,8,0.06)' }}>⚠️ Saved locally (Database Disconnected). Your booking has been saved in this browser's local demo store!</div>}
               {status === 'error' && <div className="success-msg" style={{ borderColor: '#ef4444', color: '#ef4444', background: 'rgba(239,68,68,0.06)' }}>❌ Something went wrong. Please call us directly at +91 90426 36466.</div>}
             </div>
           </div>

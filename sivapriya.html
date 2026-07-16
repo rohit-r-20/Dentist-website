@@ -1214,12 +1214,63 @@
     // ─────────────────────────────────────────────
     // CONFIG — paste your Supabase anon key below
     // ─────────────────────────────────────────────
-    const SUPABASE_URL = 'https://glngxleabttdcdzayclk.supabase.co';
-    const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdsbmd4bGVhYnR0ZGNkemF5Y2xrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3NzE2MjQsImV4cCI6MjA5MDM0NzYyNH0.Krcjt09P4vjfqRZhwKNr2xUQwpfv0LFjz2_BWvCwkAc'; // ← replace with eyJ... key from Supabase Settings → API
-    const ADMIN_PASSWORD = 'thirudentistry2025';     // ← change this to your preferred password
+    const SUPABASE_URL = 'https://tclcbetlqwlpxgtmkrkr.supabase.co';
+    const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRjbGNiZXRscXdscHhndG1rcmtyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQyMDEwMDIsImV4cCI6MjA5OTc3NzAwMn0.Ea37n8zCkt_sXXqF4BWF_YN8DYjVwM6-3lnPNTM0i4A'; // ← replace with eyJ... key from Supabase Settings → API
+    const ADMIN_PASSWORD = 'Andersonjuds01#@.';     // ← change this to your preferred password
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON);
     let allAppts = [];
+    window.dbMode = 'supabase';
+
+    // ─── DB WRAPPER (Supabase + localStorage Fallback) ───
+    const db = {
+      async select() {
+        try {
+          const { data, error } = await supabase
+            .from('appointments')
+            .select('*')
+            .order('created_at', { ascending: false });
+          if (error) throw error;
+          window.dbMode = 'supabase';
+          return data || [];
+        } catch (err) {
+          console.warn("Supabase fetch failed, falling back to localStorage:", err.message);
+          window.dbMode = 'local';
+          const localData = JSON.parse(localStorage.getItem('thiru_appointments') || '[]');
+          localData.sort((a, b) => new Date(b.created_at || b.createdAt) - new Date(a.created_at || a.createdAt));
+          return localData;
+        }
+      },
+      async updateStatus(id, status) {
+        try {
+          if (id.startsWith('local_') || window.dbMode === 'local') throw new Error("Local mode active");
+          const { error } = await supabase.from('appointments').update({ status }).eq('id', id);
+          if (error) throw error;
+        } catch (err) {
+          console.warn("Supabase update failed, updating locally:", err.message);
+          window.dbMode = 'local';
+          const localData = JSON.parse(localStorage.getItem('thiru_appointments') || '[]');
+          const index = localData.findIndex(a => a.id === id);
+          if (index !== -1) {
+            localData[index].status = status;
+            localStorage.setItem('thiru_appointments', JSON.stringify(localData));
+          }
+        }
+      },
+      async delete(id) {
+        try {
+          if (id.startsWith('local_') || window.dbMode === 'local') throw new Error("Local mode active");
+          const { error } = await supabase.from('appointments').delete().eq('id', id);
+          if (error) throw error;
+        } catch (err) {
+          console.warn("Supabase delete failed, deleting locally:", err.message);
+          window.dbMode = 'local';
+          const localData = JSON.parse(localStorage.getItem('thiru_appointments') || '[]');
+          const filtered = localData.filter(a => a.id !== id);
+          localStorage.setItem('thiru_appointments', JSON.stringify(filtered));
+        }
+      }
+    };
 
     // ─── LOGIN ───
     window.doLogin = function () {
@@ -1256,20 +1307,23 @@
         document.getElementById('tableBody').innerHTML = '<div class="state-center"><div class="spinner"></div><p>Loading appointments...</p></div>';
       }
       try {
-        const { data, error } = await supabase
-          .from('appointments')
-          .select('*')
-          .order('created_at', { ascending: false });
-        if (error) throw error;
-        allAppts = data || [];
+        allAppts = await db.select();
         updateStats();
         filterTable();
         const now = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
         document.getElementById('lastUpdated').textContent = `Last updated: ${now}`;
         document.getElementById('lastRefreshTime').textContent = now;
-        document.getElementById('dbStatus').textContent = '✅ Connected';
-        document.getElementById('emailStatusPill').className = 'status-pill ok';
-        document.getElementById('emailStatusPill').innerHTML = '✅ Supabase connected — ' + allAppts.length + ' appointments loaded';
+
+        if (window.dbMode === 'supabase') {
+          document.getElementById('dbStatus').textContent = '✅ Connected';
+          document.getElementById('emailStatusPill').className = 'status-pill ok';
+          document.getElementById('emailStatusPill').innerHTML = '✅ Supabase connected — ' + allAppts.length + ' appointments loaded';
+        } else {
+          document.getElementById('dbStatus').textContent = '⚠️ Offline / Demo Mode';
+          document.getElementById('emailStatusPill').className = 'status-pill warn';
+          document.getElementById('emailStatusPill').innerHTML = '⚠️ Database disconnected — Running in Local Demo Mode (' + allAppts.length + ' appointments stored)';
+        }
+
         if (feedback) toast('Appointments refreshed', 'success');
       } catch (err) {
         document.getElementById('tableBody').innerHTML = `<div class="state-center"><div class="state-icon">⚠️</div><h4>Connection Error</h4><p>${esc(err.message)}</p><p style="margin-top:10px;font-size:0.78rem;color:var(--text3)">Check your Supabase anon key in the config section of this file</p></div>`;
@@ -1353,8 +1407,7 @@
     // ─── UPDATE STATUS ───
     window.setStatus = async function (id, status) {
       try {
-        const { error } = await supabase.from('appointments').update({ status }).eq('id', id);
-        if (error) throw error;
+        await db.updateStatus(id, status);
         const labels = { done: 'Marked as Done ✅', confirmed: 'Appointment Confirmed 📞', cancelled: 'Cancelled ❌' };
         toast(labels[status] || 'Updated', 'success');
         loadAppointments();
@@ -1375,8 +1428,7 @@
     window.confirmDelete = async function (id) {
       closeModal();
       try {
-        const { error } = await supabase.from('appointments').delete().eq('id', id);
-        if (error) throw error;
+        await db.delete(id);
         toast('Appointment deleted', 'success');
         loadAppointments();
       } catch (err) { toast('Error: ' + err.message, 'error'); }
