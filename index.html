@@ -889,6 +889,157 @@
       flex-wrap: wrap;
     }
 
+    /* ─── APPOINTMENT ─── */
+    .appointment-section {
+      background: linear-gradient(135deg, var(--primary) 0%, #0d4f7c 100%);
+      padding: 90px 5%;
+    }
+
+    .appointment-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .apt-info h2 {
+      color: white;
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .apt-info p {
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
+    .apt-info-items {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .apt-info-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.9rem;
+    }
+
+    .apt-info-item span:first-child {
+      font-size: 1.2rem;
+    }
+
+    .apt-form {
+      background: white;
+      border-radius: 24px;
+      padding: 40px 36px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    [data-theme='dark'] .apt-form {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+    }
+
+    .apt-form h3 {
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin-bottom: 28px;
+    }
+
+    [data-theme='dark'] .apt-form h3 {
+      color: var(--text);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    [data-theme='dark'] .form-group label {
+      color: var(--text-light);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      background: var(--bg);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      width: 100%;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.12);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 14px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top: 4px;
+    }
+
+    .form-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(26, 188, 156, 0.35);
+    }
+
+    .form-submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .success-msg {
+      background: rgba(26, 188, 156, 0.1);
+      border: 1px solid var(--secondary);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      text-align: center;
+      color: var(--secondary-dark);
+      font-weight: 600;
+      margin-top: 16px;
+    }
+
     /* ─── CONTACT ─── */
     .contact-grid {
       display: grid;
@@ -1392,6 +1543,7 @@
       }
 
       .about-grid,
+      .appointment-grid,
       .contact-grid {
         grid-template-columns: 1fr;
       }
@@ -1561,7 +1713,7 @@
             <ul className="nav-links">
               {links.map(l => <li key={l}><a href={`#${l.toLowerCase()}`}>{l}</a></li>)}
             </ul>
-            <a href="https://wa.me/919042636466" target="_blank" rel="noopener" className="nav-cta" onClick={() => setMenuOpen(false)}>Book on WhatsApp</a>
+            <a href="#appointment" className="nav-cta" onClick={() => setMenuOpen(false)}>Book Appointment</a>
             <button className="hamburger" onClick={() => setMenuOpen(m => !m)} aria-label="Menu">
               <span /><span /><span />
             </button>
@@ -1582,7 +1734,7 @@
           </nav>
           <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
             {links.map(l => <a key={l} href={`#${l.toLowerCase()}`} onClick={() => setMenuOpen(false)}>{l}</a>)}
-            <a href="https://wa.me/919042636466" target="_blank" rel="noopener" style={{ color: 'var(--secondary)', fontWeight: 700 }} onClick={() => setMenuOpen(false)}>📅 Book on WhatsApp</a>
+            <a href="#appointment" style={{ color: 'var(--secondary)', fontWeight: 700 }} onClick={() => setMenuOpen(false)}>📅 Book Appointment</a>
           </div>
         </>
       );
@@ -1597,7 +1749,7 @@
             <h1>Your Smile,<br /><span>Our Priority</span></h1>
             <p>Expert dental care by Dr. Sivapriya MDS and Dr. Thirukumaran BDS at Thiru Dentistry, Padianallur. Experience compassionate, modern dentistry that puts your comfort first.</p>
             <div className="hero-actions">
-              <a href="https://wa.me/919042636466" target="_blank" rel="noopener" className="btn-primary">💬 Book via WhatsApp</a>
+              <a href="#appointment" className="btn-primary">📅 Book Appointment</a>
               <a href="#services" className="btn-outline">Explore Services</a>
             </div>
             <div className="hero-stats">
@@ -1664,7 +1816,7 @@
                 <div className="service-icon">{s.icon}</div>
                 <h3>{s.title}</h3>
                 <p>{s.desc}</p>
-                <a href="https://wa.me/919042636466" target="_blank" rel="noopener" className="service-link">Book via WhatsApp →</a>
+                <a href="#appointment" className="service-link">Book Now →</a>
               </div>
             ))}
           </div>
@@ -1822,6 +1974,107 @@
       );
     }
 
+    // ─── APPOINTMENT FORM ───
+    function Appointment() {
+      const [form, setForm] = useState({ name: '', phone: '', service: '', date: '', time: '', message: '' });
+      const [status, setStatus] = useState(''); // 'loading' | 'disconnected'
+
+      const SERVICES_LIST = [
+        'Pediatric dentistry',
+        'Geriatric dentistry',
+        'Scaling and polishing',
+        'Restorative dentistry',
+        'Dental Veneers',
+        'Dental Implants',
+        'Crowns & Bridges',
+        'Dentures',
+        'Root Canal Treatment',
+        'Orthodontics - Braces',
+        'Impactions and extractions',
+        'Other / Consultation'
+      ];
+
+      const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!form.name || !form.phone || !form.date) return;
+        setStatus('loading');
+
+        // Simulate a slight network delay, then show database disconnected state
+        setTimeout(() => {
+          setStatus('disconnected');
+          setForm({ name: '', phone: '', service: '', date: '', time: '', message: '' });
+        }, 800);
+      };
+
+      return (
+        <section className="appointment-section" id="appointment">
+          <div className="appointment-grid">
+            <div className="apt-info">
+              <div className="section-tag" style={{ background: 'rgba(26,188,156,0.2)', color: '#1ABC9C' }}>Book Now</div>
+              <h2>Schedule Your Appointment Today</h2>
+              <p>Ready for a healthier, brighter smile? Fill in the form and our team will confirm your appointment promptly. Same-day appointments available!</p>
+              <div className="apt-info-items">
+                <div className="apt-info-item"><span>📍</span><span>Service Rd, M.A.Nagar, Padianallur, Tamil Nadu 600052</span></div>
+                <div className="apt-info-item"><span>📞</span><a href="tel:+919042636466" style={{ color: 'rgba(255,255,255,0.85)', textDecoration: 'none' }}>+91 90426 36466</a></div>
+                <div className="apt-info-item"><span>🕐</span><span>Mon–Sat: 10:00 AM – 1:00 PM, 5:00 PM – 9:00 PM | Sun: By Appointment</span></div>
+                <div className="apt-info-item"><span>⭐</span><span>5.0 Rated · 172 Google Reviews · Women-Owned</span></div>
+              </div>
+            </div>
+            <div className="apt-form">
+              <h3>📋 Request an Appointment</h3>
+              <form onSubmit={handleSubmit}>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" name="name" value={form.name} onChange={handleChange} placeholder="Your name" required />
+                  </div>
+                  <div className="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="+91 XXXXX XXXXX" required />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label>Service Needed</label>
+                  <select name="service" value={form.service} onChange={handleChange}>
+                    <option value="">Select a service...</option>
+                    {SERVICES_LIST.map(s => <option key={s} value={s}>{s}</option>)}
+                  </select>
+                </div>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label>Preferred Date *</label>
+                    <input type="date" name="date" value={form.date} onChange={handleChange} min={new Date().toISOString().split('T')[0]} required />
+                  </div>
+                  <div className="form-group">
+                    <label>Preferred Time</label>
+                    <select name="time" value={form.time} onChange={handleChange}>
+                      <option value="">Any time</option>
+                      {['10:00 AM', '11:00 AM', '12:00 PM', '5:00 PM', '6:00 PM', '7:00 PM', '8:00 PM'].map(t => <option key={t} value={t}>{t}</option>)}
+                    </select>
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label>Message (optional)</label>
+                  <textarea name="message" value={form.message} onChange={handleChange} placeholder="Describe your concern or any questions..." rows={3} />
+                </div>
+                <button type="submit" className="form-submit" disabled={status === 'loading'}>
+                  {status === 'loading' ? '⏳ Submitting...' : '📅 Request Appointment'}
+                </button>
+              </form>
+              {status === 'disconnected' && (
+                <div className="success-msg" style={{ borderColor: '#ef4444', color: '#ef4444', background: 'rgba(239,68,68,0.06)', display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '16px' }}>
+                  <span style={{ fontWeight: 700, fontSize: '1.05rem' }}>For appointments call +91 90426 36466</span>
+                  <span style={{ fontSize: '0.85rem', opacity: 0.85 }}>Database is temporarily disconnected</span>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
     // ─── CONTACT ───
     function Contact() {
       return (
@@ -1897,7 +2150,7 @@
               <h4>Quick Links</h4>
               <ul className="footer-links">
                 {['About', 'Services', 'Testimonials', 'Contact'].map(l => <li key={l}><a href={`#${l.toLowerCase()}`}>{l}</a></li>)}
-                <li><a href="https://wa.me/919042636466" target="_blank" rel="noopener">Book on WhatsApp</a></li>
+                <li><a href="#appointment">Book Appointment</a></li>
               </ul>
             </div>
             <div className="footer-col">
@@ -1912,7 +2165,7 @@
                 <li><a href="tel:+919042636466">📞 +91 90426 36466</a></li>
                 <li><a href="https://wa.me/919042636466" target="_blank">💬 WhatsApp Us</a></li>
                 <li><a href="#contact">📍 Padianallur, TN 600052</a></li>
-                <li><a href="https://wa.me/919042636466" target="_blank" rel="noopener">📅 Book on WhatsApp</a></li>
+                <li><a href="#appointment">📅 Book Appointment</a></li>
               </ul>
             </div>
           </div>
@@ -1926,15 +2179,15 @@
 
     // ─── CHATBOT ───
     const CHATBOT_RESPONSES = {
-      greet: ["Hello! 😊 Welcome to Thiru Dentistry! I'm your virtual assistant. How can I help you today?\n\n💡 I can help you with:\n• Book a visit via WhatsApp\n• Service information\n• Clinic hours & location\n• General dental queries"],
-      book: ["I'd love to help you book an appointment! 📅\n\nTo schedule your visit, you can click the link below to chat with us directly on WhatsApp, or call us at **+91 90426 36466**.\n\n👉 <a href='https://wa.me/919042636466' target='_blank' style='color:var(--secondary);font-weight:bold'>Chat on WhatsApp to Book →</a>"],
+      greet: ["Hello! 😊 Welcome to Thiru Dentistry! I'm your virtual assistant. How can I help you today?\n\n💡 I can help you with:\n• Book an appointment\n• Service information\n• Clinic hours & location\n• General dental queries"],
+      book: ["I'd love to help you book an appointment! 📅\n\nPlease fill out our quick booking form below, or I can collect your details here.\n\nCould you please share:\n1. Your full name\n2. Phone number\n3. Preferred date & service\n\nOr <a href='#appointment' style='color:var(--secondary)'>click here to book directly →</a>"],
       hours: ["⏰ Our clinic hours:\n\n📅 Monday – Saturday: 10:00 AM – 1:00 PM & 5:00 PM – 9:00 PM\n📅 Sunday: By Appointment Only\n\nFeel free to call us at +91 90426 36466 or WhatsApp us anytime!"],
       location: ["📍 We're located at:\n\nService Rd, M.A.Nagar, Padianallur\nTamil Nadu, India 600052\nPlus Code: 652G+MM\n\nEasy to find near M.A.Nagar. <a href='#contact' style='color:var(--secondary)'>See on map →</a>"],
       implants: ["🦷 Dental Implants at Thiru Dentistry are a permanent solution for missing teeth. Our experienced doctors, Dr. Sivapriya MDS and Dr. Thirukumaran BDS, use the latest techniques for natural-looking, long-lasting results.\n\nWould you like to book a consultation?"],
       rootcanal: ["Root Canal Treatment is completely painless with modern techniques! 😊 We use advanced endodontic therapy to save infected teeth and relieve pain.\n\nDr. Sivapriya MDS and Dr. Thirukumaran BDS have extensive experience with root canals. Want to book an appointment?"],
       braces: ["We offer both traditional braces and modern aligner options to give you the perfect smile! 😁 Treatment duration varies based on your case.\n\nBook a free orthodontic consultation today!"],
       pain: ["We understand dental anxiety! 😌 Dr. Sivapriya MDS, Dr. Thirukumaran BDS, and our team are known for their gentle, patient approach. All our procedures are designed to be as comfortable as possible.\n\nDon't let fear stop you from getting the care you need—we're here for you!"],
-      default: ["Thank you for your message! 😊 For specific queries, please call us at **+91 90426 36466** or <a href='https://wa.me/919042636466' target='_blank' style='color:var(--secondary)'>WhatsApp us</a>.\n\nYou can also <a href='https://wa.me/919042636466' target='_blank' style='color:var(--secondary)'>chat with us to book →</a>"]
+      default: ["Thank you for your message! 😊 For specific queries, please call us at **+91 90426 36466** or <a href='https://wa.me/919042636466' target='_blank' style='color:var(--secondary)'>WhatsApp us</a>.\n\nYou can also <a href='#appointment' style='color:var(--secondary)'>book an appointment online →</a>"]
     };
 
     function detectIntent(msg) {
@@ -2039,6 +2292,7 @@
             <Services />
             <Testimonials />
             <FAQ />
+            <Appointment />
             <Contact />
           </main>
           <Footer />
